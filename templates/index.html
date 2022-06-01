@@ -19,22 +19,22 @@
         <div class="number__system_section">
           <div class="input__field">
             <label for="decimal">Decimal</label>
-            <input name="decimal" type="text" />
+            <input value="0" id="decimal" name="decimal" type="text" />
           </div>
           <div class="input__field">
             <label for="binary">Binary</label>
-            <input name="binary" type="text" />
+            <input value="0" id="binary" name="binary" type="text" />
           </div>
           <div class="input__field">
             <label for="octal">Octal</label>
-            <input name="octal" type="text" />
+            <input value="0" id="octal" name="octal" type="text" />
           </div>
           <div class="input__field">
             <label for="hexadecimal">Hexadecimal</label>
-            <input name="hexadecimal" type="text" />
+            <input value="0" id="hexadecimal" name="hexadecimal" type="text" />
           </div>
           <div class="reset__btn">
-            <button>RESET</button>
+            <button id="reset">RESET</button>
           </div>
         </div>
       </div>
@@ -57,5 +57,36 @@
         </div>
       </div>
     </div>
+    <script src="../scripts/converter.js"></script>
+    <script>
+      let decimal = document.getElementById("decimal");
+      let binary = document.getElementById("binary");
+      let octal = document.getElementById("octal");
+      let hexadecimal = document.getElementById("hexadecimal");
+      let reset = document.getElementById("reset");
+      let c = new Converter();
+      c.decimalToAny(c.toDecimal(1010, 2));
+      decimal.addEventListener("keyup", (e) => {
+        c.decimalToAny(Number(e.target.value));
+        binary.value = c.binary;
+        octal.value = c.octal;
+      });
+      binary.addEventListener("keyup", (e) => {
+        c.decimalToAny(c.toDecimal(e.target.value, 2));
+        decimal.value = c.decimal;
+        octal.value = c.octal;
+      });
+      octal.addEventListener("keyup", (e) => {
+        c.decimalToAny(c.toDecimal(e.target.value, 8));
+        decimal.value = c.decimal;
+        binary.value = c.binary;
+      });
+      reset.addEventListener("click", (e) => {
+        binary.value = "0";
+        octal.value = "0";
+        decimal.value = "0";
+        hexadecimal.value = "0";
+      });
+    </script>
   </body>
 </html>
