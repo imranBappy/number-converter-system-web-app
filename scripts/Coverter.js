@@ -30,7 +30,3 @@ class Converter {
     }
   }
 }
-
-// let c = new Converter();
-// c.decimalToAny(c.toDecimal(1010, 2));
-// console.log(c);
