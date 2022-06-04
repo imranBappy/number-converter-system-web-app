@@ -65,11 +65,11 @@
       let hexadecimal = document.getElementById("hexadecimal");
       let reset = document.getElementById("reset");
       let c = new Converter();
-      c.decimalToAny(c.toDecimal(1010, 2));
       decimal.addEventListener("keyup", (e) => {
         c.decimalToAny(Number(e.target.value));
         binary.value = c.binary;
         octal.value = c.octal;
+        hexadecimal.value = c.hexadecimal;
       });
       binary.addEventListener("keyup", (e) => {
         c.decimalToAny(c.toDecimal(e.target.value, 2));
@@ -80,6 +80,12 @@
         c.decimalToAny(c.toDecimal(e.target.value, 8));
         decimal.value = c.decimal;
         binary.value = c.binary;
+      });
+      hexadecimal.addEventListener("keyup", (e) => {
+        c.decimalToAny(c.toDecimal(e.target.value, 16));
+        decimal.value = c.decimal;
+        binary.value = c.binary;
+        octal.value = c.octal;
       });
       reset.addEventListener("click", (e) => {
         binary.value = "0";

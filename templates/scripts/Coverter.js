@@ -8,12 +8,45 @@ class Converter {
   toDecimal(value, base) {
     value = `${value}`;
     let result = 0;
-    for (let i = 0; i < value.length; i++) {
-      let digit = value[i];
-      result += digit * Math.pow(base, value.length - 1 - i);
+    if (base == 16) {
+      for (let i = 0; i < value.length; i++) {
+        let digit = value[i];
+        if (0 <= digit && digit <= 9) {
+          result += digit * Math.pow(base, value.length - 1 - i);
+        } else {
+          switch (digit) {
+            case "A":
+              result += 10 * Math.pow(base, value.length - 1 - i);
+              break;
+            case "B":
+              result += 11 * Math.pow(base, value.length - 1 - i);
+              break;
+            case "C":
+              result += 12 * Math.pow(base, value.length - 1 - i);
+              break;
+            case "D":
+              result += 13 * Math.pow(base, value.length - 1 - i);
+              break;
+            case "E":
+              result += 14 * Math.pow(base, value.length - 1 - i);
+              break;
+            case "F":
+              result += 15 * Math.pow(base, value.length - 1 - i);
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < value.length; i++) {
+        let digit = value[i];
+        result += digit * Math.pow(base, value.length - 1 - i);
+      }
     }
     return result;
   }
+
   decimalToAny(value) {
     this.decimal = value;
     this.binary = decimalConverter(value, 2);
