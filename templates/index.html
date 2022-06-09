@@ -5,6 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
+    <meta
+      property="title"
+      content="Number system conveter | Online number system conveter | binary convetion | binary converter | decimal convetion | decimal converter | octal converter | octal convetion | hexadecimal converter | Imran Hossen | Text converter "
+    />
+    <meta
+      property="keywords"
+      content="Number system conveter | Online number system conveter | binary convetion | binary converter | decimal convetion | decimal converter | octal converter | octal convetion | hexadecimal converter | Imran Hossen | Text converter "
+    />
+    <meta
+      name="description"
+      content="Online number system converter and text to binary conveter"
+    />
+    <meta name="author" content="Imran Hossen Bappy" />
     <title>Number System Converter</title>
   </head>
   <body>
@@ -13,7 +26,7 @@
         <h1 class="nav__title">Number System Converter</h1>
       </nav>
       <div class="container">
-        <h2 class="converter__title">Number System Converter</h2>
+        <h2 class="converter__title">Number Convertion</h2>
       </div>
       <div class="container">
         <div class="number__system_section">
@@ -34,7 +47,7 @@
             <input value="0" id="hexadecimal" name="hexadecimal" type="text" />
           </div>
           <div class="reset__btn">
-            <button id="reset">RESET</button>
+            <button id="reset_num">RESET</button>
           </div>
         </div>
       </div>
@@ -45,17 +58,26 @@
         <div class="number__system_section">
           <div class="input__field">
             <label for="text">Enter Your Text Below</label>
-            <textarea name="text" rows="8"></textarea>
+            <textarea id="text_box" name="text" rows="8"></textarea>
           </div>
           <div class="input__field">
             <label for="text">Enter Your Binary Below</label>
-            <textarea name="text" rows="8"></textarea>
+            <textarea id="binary_box" name="text" rows="8"></textarea>
           </div>
           <div class="reset__btn">
-            <button>RESET</button>
+            <button id="reset_box">RESET</button>
           </div>
         </div>
       </div>
+      <footer>
+        <div class="footer__container">
+          <p>
+            Copyright. © 2022
+            <a href="https://imranbappy.me/">Imran Hossen </a> All Rights
+            Reserved
+          </p>
+        </div>
+      </footer>
     </div>
     <script src="./scripts/Coverter.js"></script>
     <script>
@@ -63,7 +85,10 @@
       let binary = document.getElementById("binary");
       let octal = document.getElementById("octal");
       let hexadecimal = document.getElementById("hexadecimal");
-      let reset = document.getElementById("reset");
+      let reset_num = document.getElementById("reset_num");
+      let reset_box = document.getElementById("reset_box");
+      let text_box = document.getElementById("text_box");
+      let binary_box = document.getElementById("binary_box");
       let c = new Converter();
       decimal.addEventListener("keyup", (e) => {
         c.decimalToAny(Number(e.target.value));
@@ -87,11 +112,20 @@
         binary.value = c.binary;
         octal.value = c.octal;
       });
-      reset.addEventListener("click", (e) => {
+      reset_num.addEventListener("click", (e) => {
         binary.value = "0";
         octal.value = "0";
         decimal.value = "0";
         hexadecimal.value = "0";
+      });
+      text_box.addEventListener("keyup", (e) => {
+        let x = new TextCNV();
+        x.toBinary(e.target.value);
+        binary_box.value = x.binary.trim();
+      });
+      reset_box.addEventListener("click", (e) => {
+        binary_box.value = "";
+        text_box.value = "";
       });
     </script>
   </body>

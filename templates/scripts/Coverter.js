@@ -52,7 +52,16 @@ class Converter {
     this.binary = decimalConverter(value, 2);
     this.octal = decimalConverter(value, 8);
     this.hexadecimal = decimalConverter(value, 16);
-
+    function remainderCal(value, base) {
+      let result = "";
+      let i = 15;
+      while (value && i) {
+        result = result + Math.trunc(value * base);
+        value = Number(`0.${`${value * base}`.split(".")[1]}`);
+        i--;
+      }
+      return result;
+    }
     function decimalConverter(value, base) {
       let result = "";
       if (base === 16) {
@@ -93,6 +102,30 @@ class Converter {
         }
       }
       return result;
+    }
+  }
+}
+
+class TextCNV {
+  constructor() {
+    this.text = "";
+    this.binary = "";
+  }
+  toBinary(text) {
+    let numCNV = new Converter();
+    for (let i = 0; i < text.length; i++) {
+      let code = text.charCodeAt(i);
+      numCNV.decimalToAny(code);
+      let len = numCNV.binary.length;
+      if (numCNV.binary.length === 8) {
+        this.binary = this.binary + numCNV.binary + " ";
+      }
+      let formateBit = numCNV.binary;
+      while (len < 8) {
+        formateBit = "0" + formateBit;
+        len++;
+      }
+      this.binary = this.binary + formateBit + " ";
     }
   }
 }

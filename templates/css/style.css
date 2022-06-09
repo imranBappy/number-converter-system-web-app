@@ -96,9 +96,25 @@ div.number__system_section > div.input__field > input::placeholder {
 div.number__system_section > div.input__field > textarea {
   font-size: 1.2rem;
   width: 100%;
+  padding: 5px;
 }
 @media only screen and (max-width: 650px) {
   .converter__title {
     padding: 0px 15px;
   }
+}
+/* footer__container */
+
+.footer__container{
+  margin-top: 30px;
+    background: var(--main-bg-color);
+      color: #9ca7b1 ;
+      padding: 20px 5px;
+}
+.footer__container >p{
+  text-align: center;
+}
+.footer__container>p>a{
+  color:aliceblue;
+  text-decoration: none;
 }
