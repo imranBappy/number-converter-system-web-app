@@ -128,4 +128,16 @@ class TextCNV {
       this.binary = this.binary + formateBit + " ";
     }
   }
+  toText(binary) {
+    let numCNV = new Converter();
+    const binaryArr = binary.split(" ");
+
+    for (let i = 0; i < binaryArr.length; i++) {
+      const number = numCNV.toDecimal(binaryArr[i], 2);
+      let char = String.fromCharCode(number);
+      this.text += char;
+    }
+  }
 }
+
+
