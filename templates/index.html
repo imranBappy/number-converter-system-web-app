@@ -32,19 +32,19 @@
         <div class="number__system_section">
           <div class="input__field">
             <label for="decimal">Decimal</label>
-            <input value="0" id="decimal" name="decimal" type="text" />
+            <input value="" id="decimal" name="decimal" type="text" />
           </div>
           <div class="input__field">
             <label for="binary">Binary</label>
-            <input value="0" id="binary" name="binary" type="text" />
+            <input value="" id="binary" name="binary" type="text" />
           </div>
           <div class="input__field">
             <label for="octal">Octal</label>
-            <input value="0" id="octal" name="octal" type="text" />
+            <input value="" id="octal" name="octal" type="text" />
           </div>
           <div class="input__field">
             <label for="hexadecimal">Hexadecimal</label>
-            <input value="0" id="hexadecimal" name="hexadecimal" type="text" />
+            <input value="" id="hexadecimal" name="hexadecimal" type="text" />
           </div>
           <div class="reset__btn">
             <button id="reset_num">RESET</button>
@@ -89,6 +89,26 @@
       let reset_box = document.getElementById("reset_box");
       let text_box = document.getElementById("text_box");
       let binary_box = document.getElementById("binary_box");
+      const allElements = [
+        decimal,
+        binary,
+        octal,
+        hexadecimal,
+        text_box,
+        binary_box,
+      ];
+
+      allElements.forEach((element) => {
+        element.addEventListener("dblclick", (e) => {
+          element.select();
+          element.setSelectionRange(0, 99999);
+          navigator.clipboard.writeText(e.target.value);
+          setTimeout(() => {
+            alert("Copied!");
+          }, 100);
+        });
+      });
+
       let c = new Converter();
       decimal.addEventListener("keyup", (e) => {
         c.decimalToAny(Number(e.target.value));
@@ -113,16 +133,22 @@
         octal.value = c.octal;
       });
       reset_num.addEventListener("click", (e) => {
-        binary.value = "0";
-        octal.value = "0";
-        decimal.value = "0";
-        hexadecimal.value = "0";
+        binary.value = "";
+        octal.value = "";
+        decimal.value = "";
+        hexadecimal.value = "";
       });
       text_box.addEventListener("keyup", (e) => {
         let x = new TextCNV();
         x.toBinary(e.target.value);
         binary_box.value = x.binary.trim();
       });
+      binary_box.addEventListener("keyup", (e) => {
+        let X = new TextCNV();
+        X.toText(e.target.value);
+        text_box.value = X.text.trim();
+      });
+
       reset_box.addEventListener("click", (e) => {
         binary_box.value = "";
         text_box.value = "";
